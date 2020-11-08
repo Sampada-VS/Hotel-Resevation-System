@@ -16,10 +16,6 @@ public class HotelData {
 		return hotelName;
 	}
 
-	public String getHotelName(int index) {
-		return hotelName.get(index);
-	}
-
 	public int getHotelWeekdayRates(int index) {
 		hotelRates = new HashMap<Integer, Integer>();
 		hotelRates.put(1, 110);
@@ -36,12 +32,12 @@ public class HotelData {
 		return hotelRates.get(index);
 	}
 
-	public int getHotelRatings(int index) {
+	public Map<Integer, Integer> getHotelRatingDetails() {
 		hotelRatings = new HashMap<Integer, Integer>();
 		hotelRatings.put(1, 3);
 		hotelRatings.put(2, 4);
 		hotelRatings.put(3, 5);
-		return hotelRatings.get(index);
+		return hotelRatings;
 	}
 
 }
