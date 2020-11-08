@@ -1,9 +1,15 @@
 package com.bridgelabz.hotelreservationsystem;
 
-public class HotelReservation {
+import java.util.HashMap;
+import java.util.Map;
 
-	public static void main(String[] args) {
-		System.out.println("Welcome to Hotel Reservation program.");
+public class HotelReservation {
+	Map<String, Integer> hotel = new HashMap<String, Integer>();
+	HotelData hotelData = new HotelData();
+
+	public int getSize() {
+		hotel = hotelData.getHotels();
+		return hotel.size();
 	}
 
 }
