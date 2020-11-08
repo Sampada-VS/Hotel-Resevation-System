@@ -17,7 +17,6 @@ public class HotelData {
 	}
 
 	public String getHotelName(int index) {
-		hotels = getHotels();
 		return hotelName.get(index);
 	}
 
