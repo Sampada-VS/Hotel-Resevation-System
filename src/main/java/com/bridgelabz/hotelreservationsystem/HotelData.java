@@ -4,14 +4,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HotelData {
-	Map<String, Integer> hotelRates;
+	Map<Integer, String> hotels;
+	Map<Integer, String> hotelName;
+	Map<Integer, Integer> hotelRates;
 
-	public Map<String, Integer> getHotels() {
-		hotelRates = new HashMap<String, Integer>();
-		hotelRates.put("Lakewood", 110);
-		hotelRates.put("Bridgewood", 160);
-		hotelRates.put("Ridgewood", 220);
-		return hotelRates;
+	public Map<Integer, String> getHotels() {
+		hotelName = new HashMap<Integer, String>();
+		hotelName.put(1, "Lakewood");
+		hotelName.put(2, "Bridgewood");
+		hotelName.put(3, "Ridgewood");
+		return hotelName;
+	}
+
+	public String getHotelName(int index) {
+		hotels = getHotels();
+		return hotelName.get(index);
+	}
+
+	public int getHotelRates(int index) {
+		hotelRates = new HashMap<Integer, Integer>();
+		hotelRates.put(1, 110);
+		hotelRates.put(2, 160);
+		hotelRates.put(3, 220);
+		return hotelRates.get(index);
 	}
 
 }
