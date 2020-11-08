@@ -16,7 +16,7 @@ public class HotelData {
 		return hotelName;
 	}
 
-	public int getHotelWeekdayRates(int index) {
+	public int getHotelWeekdayRatesForRegularCustomer(int index) {
 		hotelRates = new HashMap<Integer, Integer>();
 		hotelRates.put(1, 110);
 		hotelRates.put(2, 150);
@@ -24,11 +24,26 @@ public class HotelData {
 		return hotelRates.get(index);
 	}
 
-	public int getHotelWeekendRates(int index) {
+	public int getHotelWeekendRatesForRegularCustomer(int index) {
 		hotelRates = new HashMap<Integer, Integer>();
 		hotelRates.put(1, 90);
 		hotelRates.put(2, 50);
 		hotelRates.put(3, 150);
+		return hotelRates.get(index);
+	}
+	public int getHotelWeekdayRatesForRewardCustomer(int index) {
+		hotelRates = new HashMap<Integer, Integer>();
+		hotelRates.put(1, 80);
+		hotelRates.put(2, 110);
+		hotelRates.put(3, 100);
+		return hotelRates.get(index);
+	}
+
+	public int getHotelWeekendRatesForRewardCustomer(int index) {
+		hotelRates = new HashMap<Integer, Integer>();
+		hotelRates.put(1, 80);
+		hotelRates.put(2, 50);
+		hotelRates.put(3, 40);
 		return hotelRates.get(index);
 	}
 

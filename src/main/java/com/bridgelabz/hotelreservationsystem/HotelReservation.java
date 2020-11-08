@@ -27,9 +27,9 @@ public class HotelReservation {
 		int totalRates = 0;
 		for (Integer day : dates) {
 			if (day >= 1 && day <= 5)
-				totalRates = totalRates + hotelData.getHotelWeekdayRates(hotelIndex);
+				totalRates = totalRates + hotelData.getHotelWeekdayRatesForRegularCustomer(hotelIndex);
 			else if (day == 6 || day == 7)
-				totalRates = totalRates + hotelData.getHotelWeekendRates(hotelIndex);
+				totalRates = totalRates + hotelData.getHotelWeekendRatesForRegularCustomer(hotelIndex);
 		}
 		return totalRates;
 	}
