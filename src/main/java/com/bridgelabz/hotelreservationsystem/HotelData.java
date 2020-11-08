@@ -35,6 +35,7 @@ public class HotelData {
 		hotelRates.put(3, 150);
 		return hotelRates.get(index);
 	}
+
 	public int getHotelRatings(int index) {
 		hotelRatings = new HashMap<Integer, Integer>();
 		hotelRatings.put(1, 3);
