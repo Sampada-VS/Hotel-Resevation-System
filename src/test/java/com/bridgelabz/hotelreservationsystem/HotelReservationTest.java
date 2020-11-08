@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -24,40 +25,41 @@ public class HotelReservationTest {
 	@Test
 	public void givenDates_WhenCheapestRate_ShouldReturnHotelName() {
 		HotelReservation hotelReservation = new HotelReservation();
-		String date1 = "10Sep2020";
-		String date2 = "11Sep2020";
-		List<Integer> dates = new ArrayList<>();
-		dates.add((LocalDate.parse(date1, formatter)).getDayOfWeek().getValue());
-		dates.add((LocalDate.parse(date2, formatter)).getDayOfWeek().getValue());
-		int cheapestRate = hotelReservation.getCheapestRate(dates);
+		String customerType="regular";
+		List<String> dateRange=Arrays.asList("10Sep2020","11Sep2020");
+		List<Integer> dates=new ArrayList<>();
+		for (String eachdate : dateRange) 
+			dates.add((LocalDate.parse(eachdate, formatter)).getDayOfWeek().getValue());
+		int cheapestRate = hotelReservation.getCheapestRate(dates,customerType);
 		List<String> cheapestHotel = hotelReservation.getCheapestHotel(cheapestRate);
 		assertTrue(cheapestHotel.contains("Lakewood"));
+		System.out.println("I/P : "+customerType+" : "+dateRange);
 		System.out.println(cheapestHotel + ", Total Rate : $" + cheapestRate);
 	}
 
 	@Test
 	public void givenWeekdaysAndWeekendDays_WhenCheapestRate_ShouldReturnHotelNames() {
 		HotelReservation hotelReservation = new HotelReservation();
-		String date1 = "11Sep2020";
-		String date2 = "12Sep2020";
-		List<Integer> dates = new ArrayList<>();
-		dates.add((LocalDate.parse(date1, formatter)).getDayOfWeek().getValue());
-		dates.add((LocalDate.parse(date2, formatter)).getDayOfWeek().getValue());
-		int cheapestRate = hotelReservation.getCheapestRate(dates);
+		String customerType="regular";
+		List<String> dateRange=Arrays.asList("11Sep2020","12Sep2020");
+		List<Integer> dates=new ArrayList<>();
+		for (String eachdate : dateRange) 
+			dates.add((LocalDate.parse(eachdate, formatter)).getDayOfWeek().getValue());
+		int cheapestRate = hotelReservation.getCheapestRate(dates,customerType);
 		List<String> cheapestHotel = hotelReservation.getCheapestHotel(cheapestRate);
 		assertTrue(cheapestHotel.contains("Lakewood"));
 		System.out.println(cheapestHotel + " with Total rates : $" + cheapestRate);
 	}
 
 	@Test
-	public void givenWeekdaysAndWeekendDays_WhenCheapestRate_ShouldReturnHotelWithHighestRating() {
+	public void givenWeekdaysAndWeekendDaysForRegularCustomer_WhenCheapestRate_ShouldReturnHotelWithHighestRating() {
 		HotelReservation hotelReservation = new HotelReservation();
-		String date1 = "11Sep2020";
-		String date2 = "12Sep2020";
-		List<Integer> dates = new ArrayList<>();
-		dates.add((LocalDate.parse(date1, formatter)).getDayOfWeek().getValue());
-		dates.add((LocalDate.parse(date2, formatter)).getDayOfWeek().getValue());
-		int cheapestRate = hotelReservation.getCheapestRate(dates);
+		String customerType="regular";
+		List<String> dateRange=Arrays.asList("11Sep2020","12Sep2020");
+		List<Integer> dates=new ArrayList<>();
+		for (String eachdate : dateRange) 
+			dates.add((LocalDate.parse(eachdate, formatter)).getDayOfWeek().getValue());
+		int cheapestRate = hotelReservation.getCheapestRate(dates,customerType);
 		List<String> cheapestHotel = hotelReservation.getCheapestHotel(cheapestRate);
 		String bestRatedCheapestHotel = hotelReservation.getBestRatedCheapestHotel(cheapestHotel);
 		int rating = hotelReservation.getHotelRatingBasedOnHotel(bestRatedCheapestHotel);
@@ -68,15 +70,29 @@ public class HotelReservationTest {
 	@Test
 	public void givenWeekdaysAndWeekendDays_WhenBestRating_ShouldReturnHotel() {
 		HotelReservation hotelReservation = new HotelReservation();
-		String date1 = "11Sep2020";
-		String date2 = "12Sep2020";
-		List<Integer> dates = new ArrayList<>();
-		dates.add((LocalDate.parse(date1, formatter)).getDayOfWeek().getValue());
-		dates.add((LocalDate.parse(date2, formatter)).getDayOfWeek().getValue());
+		String customerType="regular";
+		List<String> dateRange=Arrays.asList("11Sep2020","12Sep2020");
+		List<Integer> dates=new ArrayList<>();
+		for (String eachdate : dateRange) 
+			dates.add((LocalDate.parse(eachdate, formatter)).getDayOfWeek().getValue());
 		String bestRatedHotel = hotelReservation.getBestRatedHotel();
 		assertEquals("Ridgewood", bestRatedHotel);
 		int index = hotelReservation.getHotelIndex(bestRatedHotel);
-		System.out.println(bestRatedHotel + ", Total rate : " + hotelReservation.getRate(dates, index));
+		System.out.println(bestRatedHotel + ", Total rate : " + hotelReservation.getRate(dates, index,customerType));
 	}
-
+	@Test
+	public void givenWeekdaysAndWeekendDaysForRewardCustomer_WhenCheapestRate_ShouldReturnHotelWithHighestRating() {
+		HotelReservation hotelReservation = new HotelReservation();
+		String customerType="reward";
+		List<String> dateRange=Arrays.asList("11Sep2020","12Sep2020");
+		List<Integer> dates=new ArrayList<>();
+		for (String eachdate : dateRange) 
+			dates.add((LocalDate.parse(eachdate, formatter)).getDayOfWeek().getValue());
+		int cheapestRate = hotelReservation.getCheapestRate(dates,customerType);
+		List<String> cheapestHotel = hotelReservation.getCheapestHotel(cheapestRate);
+		String bestRatedCheapestHotel = hotelReservation.getBestRatedCheapestHotel(cheapestHotel);
+		int rating = hotelReservation.getHotelRatingBasedOnHotel(bestRatedCheapestHotel);
+		assertEquals("Ridgewood", bestRatedCheapestHotel);
+		System.out.println(bestRatedCheapestHotel + ", Rating : " + rating + " and Total rate : $" + cheapestRate);
+	}
 }
