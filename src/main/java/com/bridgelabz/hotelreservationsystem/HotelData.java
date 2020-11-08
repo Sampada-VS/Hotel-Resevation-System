@@ -21,11 +21,19 @@ public class HotelData {
 		return hotelName.get(index);
 	}
 
-	public int getHotelRates(int index) {
+	public int getHotelWeekdayRates(int index) {
 		hotelRates = new HashMap<Integer, Integer>();
 		hotelRates.put(1, 110);
 		hotelRates.put(2, 160);
 		hotelRates.put(3, 220);
+		return hotelRates.get(index);
+	}
+
+	public int getHotelWeekendRates(int index) {
+		hotelRates = new HashMap<Integer, Integer>();
+		hotelRates.put(1, 90);
+		hotelRates.put(2, 60);
+		hotelRates.put(3, 150);
 		return hotelRates.get(index);
 	}
 
