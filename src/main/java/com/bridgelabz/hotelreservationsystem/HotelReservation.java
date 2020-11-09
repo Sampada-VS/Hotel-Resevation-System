@@ -1,7 +1,8 @@
 package com.bridgelabz.hotelreservationsystem;
 
 import java.util.ArrayList;
-import java.util.Collections;
+
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,30 +24,31 @@ public class HotelReservation {
 		return hotel.get(index);
 	}
 
-	public int getRate(List<Integer> dates, int hotelIndex,String customerType) {
+	public int getRate(List<Integer> dates, int hotelIndex, String customerType) {
 		int totalRates = 0;
-		if(customerType.equalsIgnoreCase("Regular")) 
-			for (Integer day : dates) 
+		if (customerType.equalsIgnoreCase("Regular"))
+			for (Integer day : dates) {
 				if (day >= 1 && day <= 5)
 					totalRates = totalRates + hotelData.getHotelWeekdayRatesForRegularCustomer(hotelIndex);
 				else if (day == 6 || day == 7)
 					totalRates = totalRates + hotelData.getHotelWeekendRatesForRegularCustomer(hotelIndex);
-	
-		if(customerType.equalsIgnoreCase("Reward")) 
-			for (Integer day : dates) 
+			}
+		if (customerType.equalsIgnoreCase("Reward"))
+			for (Integer day : dates) {
 				if (day >= 1 && day <= 5)
 					totalRates = totalRates + hotelData.getHotelWeekdayRatesForRewardCustomer(hotelIndex);
 				else if (day == 6 || day == 7)
 					totalRates = totalRates + hotelData.getHotelWeekendRatesForRewardCustomer(hotelIndex);
-		
+			}
 		return totalRates;
 	}
 
-	public int getCheapestRate(List<Integer> dates, String customerType) {
+	public Integer getCheapestRate(List<Integer> dates, String customerType) {
 		for (int i = 1; i <= getSize(); i++) {
-			hotelTotalRates.put(i, getRate(dates, i,customerType));
+			hotelTotalRates.put(i, getRate(dates, i, customerType));
 		}
-		int cheapestRate = Collections.min(hotelTotalRates.values());
+		int cheapestRate = hotelTotalRates.entrySet().stream().min(Comparator.comparing(Map.Entry::getValue)).get()
+				.getValue();
 		return cheapestRate;
 	}
 
@@ -67,7 +69,8 @@ public class HotelReservation {
 			for (String eachCheapestHotel : cheapestHotel) {
 				cheapestHotelWithRatings.put(i, getHotelRatingBasedOnHotel(eachCheapestHotel));
 			}
-		int bestRating = Collections.max(cheapestHotelWithRatings.values());
+		int bestRating = cheapestHotelWithRatings.entrySet().stream().max(Comparator.comparing(Map.Entry::getValue))
+				.get().getValue();
 		return getHotelBasedOnRating(bestRating);
 	}
 
@@ -86,7 +89,7 @@ public class HotelReservation {
 	}
 
 	public String getBestRatedHotel() {
-		int bestRating = Collections.max(ratings.values());
+		int bestRating = ratings.entrySet().stream().max(Comparator.comparing(Map.Entry::getValue)).get().getValue();
 		return getHotelBasedOnRating(bestRating);
 	}
 

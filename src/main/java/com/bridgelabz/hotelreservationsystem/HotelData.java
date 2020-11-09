@@ -31,6 +31,7 @@ public class HotelData {
 		hotelRates.put(3, 150);
 		return hotelRates.get(index);
 	}
+
 	public int getHotelWeekdayRatesForRewardCustomer(int index) {
 		hotelRates = new HashMap<Integer, Integer>();
 		hotelRates.put(1, 80);
